@@ -1,3 +1,6 @@
+
+
+
 function createMap(bikeStations) {
 
   // Create the tile layer that will be the background of our map
@@ -20,7 +23,7 @@ function createMap(bikeStations) {
 
   // Create the map object with options
   var map = L.map("map-id", {
-    center: [40.73, -74.0059],
+    center: [39.678, -104.826],
     zoom: 12,
     layers: [lightmap, bikeStations]
   });
@@ -31,10 +34,15 @@ function createMap(bikeStations) {
   }).addTo(map);
 }
 
-function createMarkers(response) {
-
+//function createMarkers(response) {
+function createMarkers(stations) {
+  console.log("create markers kicked off")
+  //console.log("diningData in markers", diningData)
+  //console.log("stations:", stations)
+  //console.log("stations:", data)
   // Pull the "stations" property off of response.data
-  var stations = response.data.stations;
+  var facilities = stations.data.ProgramIdentifier;
+  console.log("should have names", facilities)
 
   // Initialize an array to hold bike markers
   var bikeMarkers = [];
@@ -44,8 +52,8 @@ function createMarkers(response) {
     var station = stations[index];
 
     // For each station, create a marker and bind a popup with the station's name
-    var bikeMarker = L.marker([station.lat, station.lon])
-      .bindPopup("<h3>" + station.name + "<h3><h3>Capacity: " + station.capacity + "</h3>");
+    var bikeMarker = L.marker([stations.GISLatitude, stations.GISLongitude])
+      .bindPopup("<h3>" + stations.ProgramIdentifier + "<h3><h3>Address: " + stations.SiteAddress + "</h3>");
 
     // Add the marker to the bikeMarkers array
     bikeMarkers.push(bikeMarker);
@@ -65,22 +73,28 @@ function createMarkers(response) {
 //d3.csv("./js/data.csv").then(function(diningData) {
 d3.csv("./static/js/data.csv").then(function(diningData) {
   console.log(diningData);
-  var county = diningData.map(data => data.County)
-  //console.log(county)
-  var city = diningData.map(data => data.City)
-  //console.log(city)
-  var zip = diningData.map(data => data.Zip)
-  //console.log(zip)
-  var street = diningData.map(data => data.SiteAddress)
-  //console.log(street)
-  var name = diningData.map(data => data.ProgramIdentifier)
-  //console.log(name)
-  var latitude = diningData.map(data => data.GISLatitude)
-  console.log(latitude)
-  var longitude = diningData.map(data => data.GISLongitude)
-  console.log(longitude)
-  var foodviolations = diningData.map(data => data.TotalFoodborneViolations)
-  //console.log(foodviolations)
-  var retailviolations = diningData.map(data => data.TotalRetailViolations)
-  //console.log(retailviolations)
+  var stations = diningData
+  console.log("facilities variable:", stations)
+   var county = diningData.map(data => data.County)
+   //console.log(county)
+   var city = diningData.map(data => data.City)
+   //console.log(city)
+   var zip = diningData.map(data => data.Zip)
+   //console.log(zip)
+   var street = diningData.map(data => data.SiteAddress)
+   //console.log(street)
+   var name = diningData.map(data => data.ProgramIdentifier)
+   //console.log(name)
+   var latitude = diningData.map(data => data.GISLatitude)
+   //console.log(latitude)
+   var longitude = diningData.map(data => data.GISLongitude)
+   //console.log(longitude)
+   var foodviolations = diningData.map(data => data.TotalFoodborneViolations)
+   //console.log(foodviolations)
+   var retailviolations = diningData.map(data => data.TotalRetailViolations)
+   //console.log(retailviolations)
+  createMarkers()
+
 });
+
+

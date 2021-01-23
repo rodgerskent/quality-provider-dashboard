@@ -18,7 +18,7 @@ function createMap(bikeStations) {
 
   // Create an overlayMaps object to hold the bikeStations layer
   var overlayMaps = {
-    "Bike Stations": bikeStations
+    "Facilities": bikeStations
   };
 
   // Create the map object with options
@@ -35,27 +35,24 @@ function createMap(bikeStations) {
 }
 
 //function createMarkers(response) {
-function createMarkers(stations) {
-  console.log("create markers kicked off")
-  //console.log("diningData in markers", diningData)
-  //console.log("stations:", stations)
-  //console.log("stations:", data)
-  // Pull the "stations" property off of response.data
-  var facilities = stations.data.ProgramIdentifier;
-  console.log("should have names", facilities)
-
+function createMarkers(markers) {
+  //console.log("create markers kicked off")
+  //console.log("markers in createMarkers:", markers)
+  // Pull the "facilities" property off of response.data
+  var facilities = markers[0].ProgramIdentifier;
+  //console.log("should have facility names", facilities)
   // Initialize an array to hold bike markers
   var bikeMarkers = [];
 
-  // Loop through the stations array
-  for (var index = 0; index < stations.length; index++) {
-    var station = stations[index];
+  // Loop through the facilities array
+  for (var index = 0; index < markers.length; index++) {
+    var restaurants = markers[index];
 
-    // For each station, create a marker and bind a popup with the station's name
-    var bikeMarker = L.marker([stations.GISLatitude, stations.GISLongitude])
-      .bindPopup("<h3>" + stations.ProgramIdentifier + "<h3><h3>Address: " + stations.SiteAddress + "</h3>");
+  // For each facility, create a marker and bind a popup with the facilities name
+    var bikeMarker = L.marker([restaurants.GISLatitude, restaurants.GISLongitude])
+      .bindPopup("<h3>" + restaurants.ProgramIdentifier + "<h3><h3>Address: " + restaurants.SiteAddress + "</h3>");
 
-    // Add the marker to the bikeMarkers array
+  // Add the marker to the bikeMarkers array
     bikeMarkers.push(bikeMarker);
   }
 
@@ -72,9 +69,9 @@ function createMarkers(stations) {
 //d3.csv("data.csv").then(function(diningData) {
 //d3.csv("./js/data.csv").then(function(diningData) {
 d3.csv("./static/js/data.csv").then(function(diningData) {
-  console.log(diningData);
+  //console.log(diningData);
   var stations = diningData
-  console.log("facilities variable:", stations)
+  console.log("stations variable being passed to createMarkers:", stations)
    var county = diningData.map(data => data.County)
    //console.log(county)
    var city = diningData.map(data => data.City)
@@ -93,8 +90,9 @@ d3.csv("./static/js/data.csv").then(function(diningData) {
    //console.log(foodviolations)
    var retailviolations = diningData.map(data => data.TotalRetailViolations)
    //console.log(retailviolations)
-  createMarkers()
-
+   var facilityid = diningData.map(data => data["Facility ID"])
+   console.log("facility id:", facilityid)
+  createMarkers(stations)
 });
 
 

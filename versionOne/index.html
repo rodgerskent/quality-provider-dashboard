@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quality Dining -Drop Down Segment</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="well">
+          <h5>City:</h5>
+          <select id="selDataset1" onchange="optionChanged(this.value)">
+             <option>All</option>
+           </select>
+        </div>
+        <div class="well">
+          <h5>Premise Type:</h5>
+          <select id="selDataset2" onchange="optionChanged(this.value)">
+              <option>All</option>
+          </select>
+        </div>
+        <div class="well">
+          <h5>Number of Violations:</h5>
+          <select id="selDataset3" onchange="optionChanged(this.value)">
+              <option>All</option>
+          </select>
+        </div>
+        
+      <div class="col-md-9">
+        <div id="map"></div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./app.js"></script>
+  
+  
+  
+</body>
+
+</html>

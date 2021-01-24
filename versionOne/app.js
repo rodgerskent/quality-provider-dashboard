@@ -1,95 +1,63 @@
 /// Map stuff
-// function createMap(bikeStations) {
+function createMap(bikeStations) {
 
-//   // Create the tile layer that will be the background of our map
-//   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-//     maxZoom: 18,
-//     id: "light-v10",
-//     accessToken: API_KEY
-//   });
+  // Create the tile layer that will be the background of our map
+  var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "light-v10",
+    accessToken: API_KEY
+  });
 
-//   // Create a baseMaps object to hold the lightmap layer
-//   var baseMaps = {
-//     "Light Map": lightmap
-//   };
+  // Create a baseMaps object to hold the lightmap layer
+  var baseMaps = {
+    "Light Map": lightmap
+  };
 
-//   // Create an overlayMaps object to hold the bikeStations layer
-//   var overlayMaps = {
-//     "Facilities": bikeStations
-//   };
+  // Create an overlayMaps object to hold the bikeStations layer
+  var overlayMaps = {
+    "Facilities": bikeStations
+  };
 
-//   // Create the map object with options
-//   var map = L.map("map", {
-//     center: [39.678, -104.826],
-//     zoom: 12,
-//     layers: [lightmap, bikeStations]
-//   });
+  // Create the map object with options
+  var map = L.map("map", {
+    center: [39.678, -104.826],
+    zoom: 12,
+    layers: [lightmap, bikeStations]
+  });
 
-//   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
-//   L.control.layers(baseMaps, overlayMaps, {
-//     collapsed: false
-//   }).addTo(map);
-// }
+  // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
+  L.control.layers(baseMaps, overlayMaps, {
+    collapsed: false
+  }).addTo(map);
+  console.log("createmap fn complete")
+}
 
-// function createMap(bikeStations) {
+function createMarkers(markers) {
+  //console.log("create markers kicked off")
+  //console.log("markers in createMarkers:", markers)
+  var facilities = markers[0].ProgramIdentifier;
+  //console.log("should have facility names", facilities)
+  // Initialize an array to hold bike markers
+  var bikeMarkers = [];
 
-//   // Create the tile layer that will be the background of our map
-//   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-//     maxZoom: 18,
-//     id: "light-v10",
-//     accessToken: API_KEY
-//   });
+  // Loop through the facilities array
+  for (var index = 0; index < markers.length; index++) {
+    var restaurants = markers[index];
 
-//   // Create a baseMaps object to hold the lightmap layer
-//   var baseMaps = {
-//     "Light Map": lightmap
-//   };
+  // For each facility, create a marker and bind a popup with the facilities name
+    var bikeMarker = L.marker([restaurants.GISLatitude, restaurants.GISLongitude])
+      .bindPopup("<h3>" + restaurants.ProgramIdentifier + "<h3><h3>Address: " + restaurants.SiteAddress + "</h3>");
 
-//   // Create an overlayMaps object to hold the bikeStations layer
-//   var overlayMaps = {
-//     "Facilities": bikeStations
-//   };
+  // Add the marker to the bikeMarkers array
+    bikeMarkers.push(bikeMarker);
+  }
 
-//   // Create the map object with options
-//   var map = L.map("map-id", {
-//     center: [39.678, -104.826],
-//     zoom: 12,
-//     layers: [lightmap, bikeStations]
-//   });
-
-//   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
-//   L.control.layers(baseMaps, overlayMaps, {
-//     collapsed: false
-//   }).addTo(map);
-// }
-
-// //function createMarkers(response) {
-// function createMarkers(markers) {
-//   //console.log("create markers kicked off")
-//   //console.log("markers in createMarkers:", markers)
-//   // Pull the "facilities" property off of response.data
-//   var facilities = markers[0].ProgramIdentifier;
-//   //console.log("should have facility names", facilities)
-//   // Initialize an array to hold bike markers
-//   var bikeMarkers = [];
-
-//   // Loop through the facilities array
-//   for (var index = 0; index < markers.length; index++) {
-//     var restaurants = markers[index];
-
-//   // For each facility, create a marker and bind a popup with the facilities name
-//     var bikeMarker = L.marker([restaurants.GISLatitude, restaurants.GISLongitude])
-//       .bindPopup("<h3>" + restaurants.ProgramIdentifier + "<h3><h3>Address: " + restaurants.SiteAddress + "</h3>");
-
-//   // Add the marker to the bikeMarkers array
-//     bikeMarkers.push(bikeMarker);
-//   }
-
-//   // Create a layer group made from the bike markers array, pass it into the createMap function
-//   createMap(L.layerGroup(bikeMarkers));
-// }
+  // Create a layer group made from the bike markers array, pass it into the createMap function
+  createMap(L.layerGroup(bikeMarkers));
+  console.log("create markers fn compplete ... markers here")
+  console.log(bikeMarkers)
+}
  
 
   d3.csv("./data.csv").then(function(diningData) {
@@ -120,6 +88,9 @@
     //console.log("premisetype:", premise)
     var selectedCity = stations
     // setting this variable to a starting point
+    // var starterStations = diningData.map(data => data.City === "Glendale")
+    // console.log("Glendale file for map kick-off")
+    // console.log(starterStations)
   
 
     function onlyUnique(value, index, self) {
@@ -182,8 +153,6 @@
   });
 
   // Initial bar chart stuff
-  //var x = [0, 1,2,3,4,5,6,7,8,9,9,9,9,9]
-  //var y = [60,50,40,30,30,20,10,5,3,12]
   var y = foodviolations
 
   var trace = {
@@ -205,7 +174,26 @@
   Plotly.newPlot("bar", data, layout);
   // End of starter bar chart stuff
 
-  //createMarkers(stations)
+  /// start of pie chart
+  var data = [{
+    title: "Violations by Establishment Type (Starter Load)",
+    //values: [19, 26, 55],
+    values: foodviolations,
+    //labels: ['Residential', 'Non-Residential', 'Utility'],
+    labels: premise,
+    type: 'pie'
+  }];
+  
+  var layout = {
+    height: 400,
+    width: 500
+  };
+  
+  Plotly.newPlot('myDiv', data, layout);
+  /// end of pie chart
+
+createMarkers(stations)
+//console.log("starter load kicked off create markers fn")
 });
 
 
@@ -231,7 +219,7 @@ function optionChanged() {
         // console.log(inputValue1);
          var inputElement2 = d3.select("#selDataset2");
          var inputValue2 = inputElement2.property("value"); 
-         console.log(inputValue2);
+        // console.log(inputValue2);
 
 
         if (inputValue1 != "All"){
@@ -244,62 +232,21 @@ function optionChanged() {
         return targetCity.Description === inputValue2
         }
         return targetCity = targetCity
-        //return targetCity = targetCity.filter(item => item.City === inputValue1)
-        //   }
-        //   else var targetCity = targetCity.filter(item => item.City === inputValue1)
+        
       }
   
         var selectedCity = targetCity.filter(fnFilter)
-        console.log("should be smaller dataset with just one city")
-        console.log(selectedCity)
+        //console.log("should be smaller dataset with just one city")
+        //console.log(selectedCity)
         
         var foodinCity = selectedCity.map(data => data.TotalFoodborneViolations)
-        console.log("array for graphing violations")
-        console.log(foodinCity)
+        //console.log("array for graphing violations")
+        //console.log(foodinCity)
 
-
-      // Stuff that was working ... targetStations stuff narrowed to users selection
-      // function fnCity(targetCity) {
-      //   //d3.event.preventDefault();
-      //   var inputElement1 = d3.select("#selDataset1");
-      //   var inputValue1 = inputElement1.property("value");
-      //   //console.log('City ... Input Values')
-      //   console.log(inputValue1);
-      //   return targetCity.City === inputValue1;
-      // }
-
-      // var selectedCity = targetCity.filter(fnCity)
-      // console.log("should be smaller dataset with just one city")
-      // console.log(selectedCity)
-      
-      // var foodinCity = selectedCity.map(data => data.TotalFoodborneViolations)
-      // console.log("array for graphing violations")
-      // console.log(foodinCity)
-
-      // end stuff that was working
-
-      // FN to narrow on premise type
-      // function fnPremise(selectedCity) {
-      //   //d3.event.preventDefault();
-      //   var inputElement2 = d3.select("#selDataset2");
-      //   var inputValue2 = inputElement2.property("value");
-      //   console.log('Confirmation that fnPremise is active')
-      //   console.log(inputValue2);
-      //   return premiseinCity.Description === inputValue2;
-      // }
-
-      // var premiseinCity = selectedCity.filter(fnPremise);
-      // console.log("Premise in City dataset")
-      // console.log(premiseinCity)
-
-      
-      // var axisy = sampleSelected.map(samples => samples.otu_ids.slice(0,10).reverse());
-      // var onesampleSelected = sampleSelected[0]
-      // var yyy = onesampleSelected.otu_ids.slice(0,10)
-      // var otuforY = yyy.map(item => `OTU ${item}`).reverse()
-      // var bubbleX = sampleSelected.map(samples => samples.otu_ids);
+        var typeinCity = selectedCity.map(data => data.Description)
+    
             
-      // Targeted car chart stuff
+      // Targeted bar chart stuff
       var trace = {
         x: foodinCity,
         //y: y,
@@ -319,6 +266,24 @@ function optionChanged() {
 
       Plotly.newPlot("bar", data, layout);
       // End of targeted bar chart stuff
+
+      /// start of pie chart
+  var data = [{
+    title: "Violations by Establishment Type (OnChange)",
+    //values: [19, 26, 55],
+    values: foodinCity,
+    //labels: ['Residential', 'Non-Residential', 'Utility'],
+    labels: typeinCity,
+    type: 'pie'
+  }];
+  
+  var layout = {
+    height: 400,
+    width: 500
+  };
+  
+  Plotly.newPlot('myDiv', data, layout);
+  /// end of pie chart
 
   });
 

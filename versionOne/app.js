@@ -1,4 +1,95 @@
 /// Map stuff
+// function createMap(bikeStations) {
+
+//   // Create the tile layer that will be the background of our map
+//   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+//     maxZoom: 18,
+//     id: "light-v10",
+//     accessToken: API_KEY
+//   });
+
+//   // Create a baseMaps object to hold the lightmap layer
+//   var baseMaps = {
+//     "Light Map": lightmap
+//   };
+
+//   // Create an overlayMaps object to hold the bikeStations layer
+//   var overlayMaps = {
+//     "Facilities": bikeStations
+//   };
+
+//   // Create the map object with options
+//   var map = L.map("map", {
+//     center: [39.678, -104.826],
+//     zoom: 12,
+//     layers: [lightmap, bikeStations]
+//   });
+
+//   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
+//   L.control.layers(baseMaps, overlayMaps, {
+//     collapsed: false
+//   }).addTo(map);
+// }
+
+// function createMap(bikeStations) {
+
+//   // Create the tile layer that will be the background of our map
+//   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+//     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+//     maxZoom: 18,
+//     id: "light-v10",
+//     accessToken: API_KEY
+//   });
+
+//   // Create a baseMaps object to hold the lightmap layer
+//   var baseMaps = {
+//     "Light Map": lightmap
+//   };
+
+//   // Create an overlayMaps object to hold the bikeStations layer
+//   var overlayMaps = {
+//     "Facilities": bikeStations
+//   };
+
+//   // Create the map object with options
+//   var map = L.map("map-id", {
+//     center: [39.678, -104.826],
+//     zoom: 12,
+//     layers: [lightmap, bikeStations]
+//   });
+
+//   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
+//   L.control.layers(baseMaps, overlayMaps, {
+//     collapsed: false
+//   }).addTo(map);
+// }
+
+// //function createMarkers(response) {
+// function createMarkers(markers) {
+//   //console.log("create markers kicked off")
+//   //console.log("markers in createMarkers:", markers)
+//   // Pull the "facilities" property off of response.data
+//   var facilities = markers[0].ProgramIdentifier;
+//   //console.log("should have facility names", facilities)
+//   // Initialize an array to hold bike markers
+//   var bikeMarkers = [];
+
+//   // Loop through the facilities array
+//   for (var index = 0; index < markers.length; index++) {
+//     var restaurants = markers[index];
+
+//   // For each facility, create a marker and bind a popup with the facilities name
+//     var bikeMarker = L.marker([restaurants.GISLatitude, restaurants.GISLongitude])
+//       .bindPopup("<h3>" + restaurants.ProgramIdentifier + "<h3><h3>Address: " + restaurants.SiteAddress + "</h3>");
+
+//   // Add the marker to the bikeMarkers array
+//     bikeMarkers.push(bikeMarker);
+//   }
+
+//   // Create a layer group made from the bike markers array, pass it into the createMap function
+//   createMap(L.layerGroup(bikeMarkers));
+// }
  
 
   d3.csv("./data.csv").then(function(diningData) {
@@ -58,6 +149,8 @@
         var cell = row.append("option");
         cell.text(value);
       });
+
+  
   });
 
   var menuList2 = uniquePremise;
@@ -112,8 +205,8 @@
   Plotly.newPlot("bar", data, layout);
   // End of starter bar chart stuff
 
-
-  });
+  //createMarkers(stations)
+});
 
 
 //var button = d3.select("#selDataset");

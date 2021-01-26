@@ -22,7 +22,7 @@ function createMap(bikeStations) {
   // Create the map object with options
   var map = L.map("map", {
     center: [39.678, -104.826],
-    zoom: 12,
+    zoom: 10,
     layers: [lightmap, bikeStations]
   });
 
@@ -31,6 +31,7 @@ function createMap(bikeStations) {
     collapsed: false
   }).addTo(map);
   console.log("createmap fn complete")
+  map.invalidateSize();
 }
 
 function createMarkers(markers) {

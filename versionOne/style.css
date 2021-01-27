@@ -5,3 +5,30 @@ body,
   padding: 0;
   margin: 0;
 }
+
+.box {
+  min-height: 50px;
+  padding: 2px;
+  margin: 2px;
+  margin-left: 15px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.border {
+  background: rgb(89, 191, 224);
+  min-height: 10px;
+  font-size: 9px;
+}
+
+#bar{
+  width: 85%;
+  height: 10%;
+  font-size: 9px;
+}
+
+#myDiv{
+  width: 85%;
+  height: 10%;
+  font-size: 9px;
+}

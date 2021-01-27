@@ -167,7 +167,7 @@ function createMarkers(markers) {
   var data = [trace];
 
   var layout = {
-    title: "The Number of Establishments by Violation Count (Starter Load)",
+    title: "The Number of Establishments by Violation Count (Start)",
     xaxis: { title: "Number of Violations" },
     // yaxis: { title: "OTU"}
   };
@@ -177,7 +177,7 @@ function createMarkers(markers) {
 
   /// start of pie chart
   var data = [{
-    title: "Violations by Establishment Type (Starter Load)",
+    title: "Violations by Establishment Type (Starter)",
     //values: [19, 26, 55],
     values: foodviolations,
     //labels: ['Residential', 'Non-Residential', 'Utility'],
@@ -186,8 +186,9 @@ function createMarkers(markers) {
   }];
   
   var layout = {
-    height: 400,
-    width: 500
+    //font-size: 9px,
+    //height: 400,
+    //width: 500
   };
   
   Plotly.newPlot('myDiv', data, layout);
@@ -262,7 +263,9 @@ function optionChanged() {
       var layout = {
         title: "Number of Establishments by Violation Count (optionChanged)",
         xaxis: { title: "Number of Violations" },
-        // yaxis: { title: "OTU"}
+        //height: 400,
+        //width: 500
+        //yaxis: { title: "OTU"}
       };
 
       Plotly.newPlot("bar", data, layout);
@@ -279,12 +282,21 @@ function optionChanged() {
   }];
   
   var layout = {
-    height: 400,
-    width: 500
+    //height: 400,
+    //width: 500
   };
   
   Plotly.newPlot('myDiv', data, layout);
-  /// end of pie chart
+  /// end of targeted pie chart
+
+  // Targeted Map start here
+
+
+
+  // Targeted Map end here
+
+
+
 
   });
 

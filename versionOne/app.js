@@ -47,16 +47,27 @@ function createMarkers(markers) {
     var premise = diningData.map(data => data["Description"])
     //console.log("premisetype:", premise)
     var inputValue1 = city[0]
-    console.log("Initial City ...")
-    console.log(inputValue1)
+    //console.log("Initial City ...")
+    //console.log(inputValue1)
 
     if (inputValue1) {
       //tbody.html("");
       var starterData = stations.filter(item => item.City === inputValue1);
+      var starterShame = starterData.filter(item => item.TotalFoodborneViolations >=5)
+      console.log("shame list")
+      console.log(starterShame)
       //var foodviolations = starterData.filter(item => item.TotalFoodborneViolations);
       //var premise = starterData.filter(item => item["Description"]);
       //console.log("starterData ...")
       //console.log(starterData);
+      var tbody = d3.select("tbody");
+      // starterShame.forEach((offender) => {
+      //   var row = tbody.append("tr");
+      //   Object.entries(offender).forEach((item[ProgramIdentifier]) => {
+      //     var cell = row.append("td");
+      //     cell.text(value);
+      //   });
+      // });
     }
     
     // d3.select("#selDataset1").selectAll("option")
@@ -130,17 +141,20 @@ function createMarkers(markers) {
   var y = foodviolations
   var trace = {
     x: y,
+    marker: {
+      color: 'crimson',
+    },
     type: "histogram",
   };
   var data = [trace];
   var layout = {
     //title: "The Number of Establishments by Violation Count (Start)",
-    xaxis: { title: "Number of Violations -"},
+    xaxis: { title: "Number of Violations"},
     yaxis: { title: "Number of Establishments"},
     height: 245,
-    width: 420,
+    width: 480,
     margin: {
-      l: 100,
+      l: 75,
       r: 5,
       b: 40,
       t: 10,
@@ -162,7 +176,7 @@ function createMarkers(markers) {
       height: 245,
       width: 420,
       margin: {
-        l: 100,
+        l: 35,
         r: 5,
         b: 40,
         t: 10,
@@ -174,8 +188,8 @@ function createMarkers(markers) {
 
   // Initial map build
   bikeMarkers = createMarkers(starterData)
-  console.log("Initial bike markers here")
-  console.log(bikeMarkers)
+  //console.log("Initial bike markers here")
+  //console.log(bikeMarkers)
   // Create the tile layer that will be the background of our map
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -203,9 +217,12 @@ function createMarkers(markers) {
   }).addTo(map);
   // End of initial d3 data, drop down, chart and map builds
   console.log("Finished initial load = map, bar, pie & menus")
-  console.log(overlayMaps)
+  //console.log(overlayMaps)
   //return overlayMaps
 });
+
+
+
 
 // 2nd Main Section that responds to user selections on city and premise type
 var form = d3.select("form");
@@ -252,22 +269,25 @@ function optionChanged() {
       // Builds user driven bar chart
       var trace = {
         x: foodinCity,
+        marker: {
+          color: 'crimson',
+        },
         type: "histogram",
       };
       var data = [trace];
       var layout = {
         //title: "Number of Establishments by Violation Count (optionChanged)",
-        xaxis: { title: "Number of Violations" },
-        yaxis: { title: "Number of Establishments" },
+        xaxis: { title: "Number of Violations"},
+        yaxis: { title: "Number of Establishments"},
         height: 245,
-        width: 420,
+        width: 480,
         margin: {
-        l: 100,
-        r: 5,
-        b: 40,
-        t: 10,
-        pad: 8,
-      }
+          l: 75,
+          r: 5,
+          b: 40,
+          t: 10,
+          pad: 8,
+        }
       };
       Plotly.newPlot("bar", data, layout);
       // End of user driven bar chart
@@ -281,35 +301,39 @@ function optionChanged() {
       }];
       var layout = {
         height: 245,
-      width: 420,
-      margin: {
-        l: 100,
-        r: 5,
-        b: 40,
-        t: 10,
-        pad: 8,
+        width: 420,
+        margin: {
+          l: 35,
+          r: 5,
+          b: 40,
+          t: 10,
+          pad: 8,
         }
       };
   
     Plotly.newPlot('myDiv', data, layout);
     /// End of user driven pie chart build
  
-  console.log("selected city here")
+
+  // User driven mapping process starts here
+  console.log("Here is smaller city list going to mapping")
   console.log(selectedCity)
-
-  console.log("targeted markers here")
+  
+  // Here is the user driven marker call
   targetedMarkers = createMarkersII(selectedCity)
-  console.log(targetedMarkers)
+  // console.log("targeted markers here")
+  // console.log(targetedMarkers)
 
-  console.log('remove layer here?')
+
+  // HERE IS A BUNCH OF ATTEMPTS AT MAKING A NEW MAP
+  //console.log('remove layer here?')
   //map.remove(baseMaps);
   //map.remove(overlayMaps);
   //console.log(bikeMarkers)
   //console.log("Type of ", typeof (map))
   //map.removeLayer(bikeMarkers);
- 
-  console.log("bike before")
-  console.log(bikeMarkers)
+  //console.log("bike before")
+  //console.log(bikeMarkers)
   // // remove markers approach from stack
   // if (bikeMarkers!==null) {
   //  for (var i = bikeMarkers.length - 1; i >= 0; i--) {
@@ -319,8 +343,8 @@ function optionChanged() {
   // console.log("bike after")
   // console.log(bikeMarkers)
 
-  console.log("Map ...")
-  console.log(map);
+  //console.log("Map ...")
+  //console.log(map);
   // if(map != 'undefined' || map != null) {
   //   map.remove(); 
   // }
@@ -328,6 +352,19 @@ function optionChanged() {
   //d3.remove('map');
   //.html ("")
   //.div("")
+  d3.select("#map").selectAll("div")
+      //.remove("div")
+      //.remove("#map")
+      //.remove("class")
+      .remove(map)
+      .remove(L.map)
+      .remove(L.control)
+      //.remove(t.map)
+      //.remove("leaflet-control-container")
+      //.remove("leaflet-pane leaflet-map-pane")
+      //.remove("leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom")
+  //console.log("Map ...")
+  //console.log(map);
 
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -344,11 +381,11 @@ function optionChanged() {
     "Facilities": targetedMarkers
   };
 
-  // var map = L.map("map", {
-  //   center: [39.678, -104.826],
-  //   zoom: 10,
-  //   layers: [lightmap, targetedMarkers]
-  // });
+  var map = L.map("map", {
+    center: [39.678, -104.826],
+    zoom: 10,
+    layers: [lightmap, targetedMarkers]
+  });
 
   //map.invalidateSize();
 
@@ -372,7 +409,7 @@ function optionChanged() {
 }
 
 function createMarkersII(secondlap) {
-  console.log("createMarkersII kicked off")
+  console.log("Fn that creates user driven markers started")
   var establishments = secondlap[0].ProgramIdentifier;
   var targetedMarkers = [];
 
@@ -386,10 +423,9 @@ function createMarkersII(secondlap) {
 
   // Add the marker to the bikeMarkers array
     targetedMarkers.push(targetedMarker);
-    console.log("should see targeted markers here")
-    console.log(targetedMarkers)
-    
   }
   // return (L.layerGroup(targetedMarkers));
+  console.log("Here is what fn produced ...")
+  console.log(targetedMarkers)
   return L.layerGroup(targetedMarkers)
 } 

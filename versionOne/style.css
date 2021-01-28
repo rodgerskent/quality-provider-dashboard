@@ -17,6 +17,19 @@ body,
   border: 2px solid hsla(0, 0%, 0%, 0.5);
 }
 
+.header {
+  background: rgb(243, 247, 248);
+  font-size: 30px;
+  color: rgb(19, 86, 138)
+}
+
+.well {
+  background: rgb(243, 247, 248);
+  font-size: 14px;
+  margin-left: 15px;
+  color: rgb(19, 86, 138)
+}
+
 .border {
   background: rgb(89, 191, 224);
   min-height: 10px;
@@ -27,14 +40,17 @@ body,
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }
 
 #myDiv{
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  /* border-right: 2px solid hsla(0, 0%, 0%, 0.5); */
+  /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }
 
 /* .col-md-5 {

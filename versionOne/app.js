@@ -46,7 +46,27 @@ function createMarkers(markers) {
     //console.log("facility id:", facilityid)
     var premise = diningData.map(data => data["Description"])
     //console.log("premisetype:", premise)
+    var inputValue1 = city[0]
+    console.log("Initial City ...")
+    console.log(inputValue1)
+
+    if (inputValue1) {
+      //tbody.html("");
+      var starterData = stations.filter(item => item.City === inputValue1);
+      //var foodviolations = starterData.filter(item => item.TotalFoodborneViolations);
+      //var premise = starterData.filter(item => item["Description"]);
+      //console.log("starterData ...")
+      //console.log(starterData);
+    }
     
+    // d3.select("#selDataset1").selectAll("option")
+    // .data(inputValue1)
+    // .text(inputValue1)
+    // .enter() // creates placeholder for new data
+    // .append("option") // appends a div to placeholder
+    // .html(function(d) {
+    // return `<option="${d}">`;
+    // }); // sets the initial city to aurora
   
     // Function to build a list of unique drop down menu items
     function onlyUnique(value, index, self) {
@@ -115,7 +135,8 @@ function createMarkers(markers) {
   var data = [trace];
   var layout = {
     //title: "The Number of Establishments by Violation Count (Start)",
-    xaxis: { title: "Number of Violations" },
+    xaxis: { title: "Number of Violations -"},
+    yaxis: { title: "Number of Establishments"},
     height: 245,
     width: 420,
     margin: {
@@ -131,7 +152,7 @@ function createMarkers(markers) {
 
   /// Initial pie chart build
   var data = [{
-    //title: "Violations by Establishment Type (Starter)",
+    title: "Violations by Establishment Type",
     values: foodviolations,
     labels: premise,
     type: 'pie'
@@ -152,7 +173,7 @@ function createMarkers(markers) {
   /// end of initial pie chart build
 
   // Initial map build
-  bikeMarkers = createMarkers(stations)
+  bikeMarkers = createMarkers(starterData)
   console.log("Initial bike markers here")
   console.log(bikeMarkers)
   // Create the tile layer that will be the background of our map
@@ -237,42 +258,76 @@ function optionChanged() {
       var layout = {
         //title: "Number of Establishments by Violation Count (optionChanged)",
         xaxis: { title: "Number of Violations" },
+        yaxis: { title: "Number of Establishments" },
+        height: 245,
+        width: 420,
+        margin: {
+        l: 100,
+        r: 5,
+        b: 40,
+        t: 10,
+        pad: 8,
+      }
       };
       Plotly.newPlot("bar", data, layout);
       // End of user driven bar chart
 
       /// Start of user selected Pie Chart build
       var data = [{
-        //title: "Violations by Establishment Type (OnChange)",
+        title: "Violations by Establishment Type",
         values: foodinCity,
         labels: typeinCity,
         type: 'pie'
       }];
       var layout = {
-        height: 400,
-        width: 1000,
-        margin: {
-          l: 100,
-          r: 5,
-          b: 40,
-          t: 25,
-          pad: 8,
+        height: 245,
+      width: 420,
+      margin: {
+        l: 100,
+        r: 5,
+        b: 40,
+        t: 10,
+        pad: 8,
         }
-        
-        
       };
   
     Plotly.newPlot('myDiv', data, layout);
     /// End of user driven pie chart build
  
-  console.log("Array with user driven city stuff")
+  console.log("selected city here")
   console.log(selectedCity)
+
+  console.log("targeted markers here")
   targetedMarkers = createMarkersII(selectedCity)
+  console.log(targetedMarkers)
 
   console.log('remove layer here?')
+  //map.remove(baseMaps);
+  //map.remove(overlayMaps);
   //console.log(bikeMarkers)
   //console.log("Type of ", typeof (map))
-  map.removeLayer(bikeMarkers);
+  //map.removeLayer(bikeMarkers);
+ 
+  console.log("bike before")
+  console.log(bikeMarkers)
+  // // remove markers approach from stack
+  // if (bikeMarkers!==null) {
+  //  for (var i = bikeMarkers.length - 1; i >= 0; i--) {
+  //     bikeMarkers[i].remove();
+  //   }
+  // }
+  // console.log("bike after")
+  // console.log(bikeMarkers)
+
+  console.log("Map ...")
+  console.log(map);
+  // if(map != 'undefined' || map != null) {
+  //   map.remove(); 
+  // }
+
+  //d3.remove('map');
+  //.html ("")
+  //.div("")
 
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -285,16 +340,29 @@ function optionChanged() {
     "Light Map": lightmap
   };
 
-  console.log("should be adding new markers here")
-  console.log(targetedMarkers)
-
   var overlayMaps = {
     "Facilities": targetedMarkers
   };
 
-  L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-  }).addTo(map);
+  // var map = L.map("map", {
+  //   center: [39.678, -104.826],
+  //   zoom: 10,
+  //   layers: [lightmap, targetedMarkers]
+  // });
+
+  //map.invalidateSize();
+
+  // L.control.layers(baseMaps, overlayMaps, {
+  //   collapsed: false
+  // }).removeControl(map);
+
+  // L.control.layers(baseMaps, overlayMaps, {
+  //   collapsed: false
+  // }).removeLayer(map);
+
+  // L.control.layers(baseMaps, overlayMaps, {
+  //   collapsed: false
+  // }).addTo(map);
 
   // L.control.layers(baseMaps,overlayMaps)
   // .addTo(map);

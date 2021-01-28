@@ -117,9 +117,9 @@ function createMarkers(markers) {
     //title: "The Number of Establishments by Violation Count (Start)",
     xaxis: { title: "Number of Violations" },
     margin: {
-      l: 5,
-      r: 2,
-      b: 0,
+      l: 30,
+      r: 5,
+      b:30,
       t: 5,
       pad: 8
     }
@@ -137,9 +137,9 @@ function createMarkers(markers) {
   
   var layout = {
     margin: {
-      l: 5,
-      r: 2,
-      b: 0,
+      l: 30,
+      r: 5,
+      b: 30,
       t: 5,
       pad: 8
     }
@@ -149,6 +149,8 @@ function createMarkers(markers) {
 
   // Initial map build
   bikeMarkers = createMarkers(stations)
+  console.log("Initial bike markers here")
+  console.log(bikeMarkers)
   // Create the tile layer that will be the background of our map
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -176,6 +178,8 @@ function createMarkers(markers) {
   }).addTo(map);
   // End of initial d3 data, drop down, chart and map builds
   console.log("Finished initial load = map, bar, pie & menus")
+  console.log(overlayMaps)
+  //return overlayMaps
 });
 
 // 2nd Main Section that responds to user selections on city and premise type
@@ -251,32 +255,12 @@ function optionChanged() {
   console.log("Array with user driven city stuff")
   console.log(selectedCity)
   createMarkersII(selectedCity)
-  });
-
-}
-
-function createMarkersII(markers) {
-  console.log("createMarkersII kicked off")
-  //console.log("markers in createMarkers:", markers)
-  var facilities = markers[0].ProgramIdentifier;
-  var targetedMarkers = [];
-
-  // Loop through the user driven establishments array
-  for (var index = 0; index < markers.length; index++) {
-    var targetRestaurants = markers[index];
-
-  // For each facility, create a marker and bind a popup with the establishment name
-    var targetedMarker = L.marker([targetRestaurants.GISLatitude, targetRestaurants.GISLongitude])
-      .bindPopup("<h3>" + targetRestaurants.ProgramIdentifier + "<h3><h3>Address: " + targetRestaurants.SiteAddress + "</h3>");
-
-  // Add the marker to the bikeMarkers array
-    targetedMarkers.push(targetedMarker);
-  }
 
   console.log('remove layer here?')
-  map.removeLayer(overlayMaps);
+  console.log(bikeMarkers)
+  //map.removeLayer(bikeMarkers);
 
-  console.log("should have new markers here")
+  console.log("should be adding new markers here")
   console.log(targetedMarkers)
   var overlayMaps = {
     "Facilities": targetedMarkers
@@ -286,4 +270,27 @@ function createMarkersII(markers) {
     collapsed: false
   }).addTo(map);
 
+  });
+
+}
+
+function createMarkersII(secondlap) {
+  console.log("createMarkersII kicked off")
+  var establishments = secondlap[0].ProgramIdentifier;
+  var targetedMarkers = [];
+
+  // Loop through the user driven establishments array
+  for (var index = 0; index < secondlap.length; index++) {
+    var targetRestaurants = secondlap[index];
+
+  // For each facility, create a marker and bind a popup with the establishment name
+    var targetedMarker = L.marker([targetRestaurants.GISLatitude, targetRestaurants.GISLongitude])
+      .bindPopup("<h3>" + targetRestaurants.ProgramIdentifier + "<h3><h3>Address: " + targetRestaurants.SiteAddress + "</h3>");
+
+  // Add the marker to the bikeMarkers array
+    targetedMarkers.push(targetedMarker);
+    console.log("should see targeted markers here")
+    console.log(targetedMarkers)
+    return targetedMarkers
+  }
 } 

@@ -46,7 +46,7 @@ function createMarkers(markers) {
     //console.log("facility id:", facilityid)
     var premise = diningData.map(data => data["Description"])
     //console.log("premisetype:", premise)
-    var selectedCity = stations
+    
   
     // Function to build a list of unique drop down menu items
     function onlyUnique(value, index, self) {
@@ -116,12 +116,14 @@ function createMarkers(markers) {
   var layout = {
     //title: "The Number of Establishments by Violation Count (Start)",
     xaxis: { title: "Number of Violations" },
+    height: 245,
+    width: 420,
     margin: {
-      l: 30,
+      l: 100,
       r: 5,
-      b:30,
-      t: 5,
-      pad: 8
+      b: 40,
+      t: 10,
+      pad: 8,
     }
   };
   Plotly.newPlot("bar", data, layout);
@@ -136,13 +138,15 @@ function createMarkers(markers) {
   }];
   
   var layout = {
-    margin: {
-      l: 30,
-      r: 5,
-      b: 30,
-      t: 5,
-      pad: 8
-    }
+      height: 245,
+      width: 420,
+      margin: {
+        l: 100,
+        r: 5,
+        b: 40,
+        t: 10,
+        pad: 8,
+      }
   };
   Plotly.newPlot('myDiv', data, layout);
   /// end of initial pie chart build
@@ -245,8 +249,17 @@ function optionChanged() {
         type: 'pie'
       }];
       var layout = {
-        //height: 400,
-        //width: 500
+        height: 400,
+        width: 1000,
+        margin: {
+          l: 100,
+          r: 5,
+          b: 40,
+          t: 25,
+          pad: 8,
+        }
+        
+        
       };
   
     Plotly.newPlot('myDiv', data, layout);
@@ -254,21 +267,37 @@ function optionChanged() {
  
   console.log("Array with user driven city stuff")
   console.log(selectedCity)
-  createMarkersII(selectedCity)
+  targetedMarkers = createMarkersII(selectedCity)
 
   console.log('remove layer here?')
-  console.log(bikeMarkers)
-  //map.removeLayer(bikeMarkers);
+  //console.log(bikeMarkers)
+  //console.log("Type of ", typeof (map))
+  map.removeLayer(bikeMarkers);
+
+  var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "light-v10",
+    accessToken: API_KEY
+  });
+
+  var baseMaps = {
+    "Light Map": lightmap
+  };
 
   console.log("should be adding new markers here")
   console.log(targetedMarkers)
+
   var overlayMaps = {
     "Facilities": targetedMarkers
   };
 
-  L.control.layers(overlayMaps, {
+  L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(map);
+
+  // L.control.layers(baseMaps,overlayMaps)
+  // .addTo(map);
 
   });
 
@@ -291,6 +320,8 @@ function createMarkersII(secondlap) {
     targetedMarkers.push(targetedMarker);
     console.log("should see targeted markers here")
     console.log(targetedMarkers)
-    return targetedMarkers
+    
   }
+  // return (L.layerGroup(targetedMarkers));
+  return L.layerGroup(targetedMarkers)
 } 

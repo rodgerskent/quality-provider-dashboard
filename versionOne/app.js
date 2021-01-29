@@ -50,42 +50,53 @@ function createMarkers(markers) {
     //console.log("Initial City ...")
     //console.log(inputValue1)
 
+    function shameSorter(a, b) {
+      if (a > b) {
+        return -1;
+      }
+      if (a < b) {
+        return 1;
+      }
+      return 0;
+    }
+
     if (inputValue1) {
-      //tbody.html("");
+      var tbody = d3.select("tbody");
+      tbody.html("");
       var starterData = stations.filter(item => item.City === inputValue1);
       var starterShame = starterData.filter(item => item.TotalFoodborneViolations >=5)
-      console.log("shame list")
+      starterShame = starterShame.sort(shameSorter);
+      starterShame = starterShame.slice(0,6)
+      //console.log("shame list")
+      //console.log(starterShame)
+      starterShame.forEach((offender) => {
+        var row = tbody.append("tr");
+        var cell = row.append("td");
+        cell.text(offender.ProgramIdentifier);
+      });
       console.log(starterShame)
-      //var foodviolations = starterData.filter(item => item.TotalFoodborneViolations);
-      //var premise = starterData.filter(item => item["Description"]);
-      //console.log("starterData ...")
-      //console.log(starterData);
-      var tbody = d3.select("tbody");
-      // starterShame.forEach((offender) => {
-      //   var row = tbody.append("tr");
-      //   Object.entries(offender).forEach((item[ProgramIdentifier]) => {
-      //     var cell = row.append("td");
-      //     cell.text(value);
-      //   });
-      // });
     }
-    
-    // d3.select("#selDataset1").selectAll("option")
-    // .data(inputValue1)
-    // .text(inputValue1)
-    // .enter() // creates placeholder for new data
-    // .append("option") // appends a div to placeholder
-    // .html(function(d) {
-    // return `<option="${d}">`;
-    // }); // sets the initial city to aurora
   
     // Function to build a list of unique drop down menu items
     function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
     }
+ 
+    function compare(a, b) {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    }
 
     var uniqueCity = city.filter(onlyUnique)
     //var uniqueCity = uniqueCity.sort
+    uniqueCity.sort(compare);
+
+
     //console.log("unique city" , uniqueCity)
     var uniquePremise = premise.filter(onlyUnique)
     //console.log("unique premise" , uniquePremise)
@@ -137,6 +148,9 @@ function createMarkers(markers) {
       });
   });
 
+
+
+
   // Initial bar chart build
   var y = foodviolations
   var trace = {
@@ -149,7 +163,7 @@ function createMarkers(markers) {
   var data = [trace];
   var layout = {
     //title: "The Number of Establishments by Violation Count (Start)",
-    xaxis: { title: "Number of Violations"},
+    xaxis: { title: "Number of Foodborne Violations"},
     yaxis: { title: "Number of Establishments"},
     height: 245,
     width: 480,
@@ -208,13 +222,18 @@ function createMarkers(markers) {
   // Create the map object with options
   var map = L.map("map", {
     center: [39.678, -104.826],
-    zoom: 10,
+    zoom: 9,
     layers: [lightmap, bikeMarkers]
   });
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(map);
+
+  var [apanLat] = starterData.map(data => data.GISLatitude)
+  var [apanLng] = starterData.map(data => data.GISLongitude)
+  map.panTo(new L.LatLng(apanLat-.30, apanLng));
+
   // End of initial d3 data, drop down, chart and map builds
   console.log("Finished initial load = map, bar, pie & menus")
   //console.log(overlayMaps)
@@ -234,7 +253,7 @@ function optionChanged() {
     //console.log("Confirms full dataset in optionChanged")
       var targetCity = targetData
       //console.log(targetCity)
-      // Functiont to target the data set based on city selected
+      // Function to target the data set based on city selected
       function fnFilter(targetCity) {
         //d3.event.preventDefault();
          //console.log('fnFilter function active')
@@ -255,6 +274,7 @@ function optionChanged() {
         return targetCity.Description === inputValue2
         }
         return targetCity = targetCity
+
       }
   
         var selectedCity = targetCity.filter(fnFilter)
@@ -265,6 +285,32 @@ function optionChanged() {
         //console.log(foodinCity)
         var typeinCity = selectedCity.map(data => data.Description)
     
+       // Updated list of shame
+       function fnShame(a, b) {
+        if (a > b) {
+          return -1;
+        }
+        if (a < b) {
+          return 1;
+        }
+        return 0;
+      }
+          
+        var tbody = d3.select("tbody");
+        tbody.html("");
+        //var targetCity = targetCity.filter(item => item.City === inputValue1);
+        var updateShame = selectedCity.filter(item => item.TotalFoodborneViolations >=5)
+        //updateShame = updateShame.sort(fnShame);
+        updateShame = updateShame.slice(0,5)
+        console.log("shame list")
+        console.log(updateShame)
+        updateShame.forEach((offender) => {
+          var row = tbody.append("tr");
+          var cell = row.append("td");
+          cell.text(offender.ProgramIdentifier);
+        });
+        console.log(updateShame) 
+
             
       // Builds user driven bar chart
       var trace = {
@@ -277,7 +323,7 @@ function optionChanged() {
       var data = [trace];
       var layout = {
         //title: "Number of Establishments by Violation Count (optionChanged)",
-        xaxis: { title: "Number of Violations"},
+        xaxis: { title: "Number of Foodborne Violations"},
         yaxis: { title: "Number of Establishments"},
         height: 245,
         width: 480,
@@ -324,48 +370,14 @@ function optionChanged() {
   // console.log("targeted markers here")
   // console.log(targetedMarkers)
 
+  d3.select("#map")
+      .remove()
+      .enter()
 
-  // HERE IS A BUNCH OF ATTEMPTS AT MAKING A NEW MAP
-  //console.log('remove layer here?')
-  //map.remove(baseMaps);
-  //map.remove(overlayMaps);
-  //console.log(bikeMarkers)
-  //console.log("Type of ", typeof (map))
-  //map.removeLayer(bikeMarkers);
-  //console.log("bike before")
-  //console.log(bikeMarkers)
-  // // remove markers approach from stack
-  // if (bikeMarkers!==null) {
-  //  for (var i = bikeMarkers.length - 1; i >= 0; i--) {
-  //     bikeMarkers[i].remove();
-  //   }
-  // }
-  // console.log("bike after")
-  // console.log(bikeMarkers)
-
-  //console.log("Map ...")
-  //console.log(map);
-  // if(map != 'undefined' || map != null) {
-  //   map.remove(); 
-  // }
-
-  //d3.remove('map');
-  //.html ("")
-  //.div("")
-  d3.select("#map").selectAll("div")
-      //.remove("div")
-      //.remove("#map")
-      //.remove("class")
-      .remove(map)
-      .remove(L.map)
-      .remove(L.control)
-      //.remove(t.map)
-      //.remove("leaflet-control-container")
-      //.remove("leaflet-pane leaflet-map-pane")
-      //.remove("leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom")
-  //console.log("Map ...")
-  //console.log(map);
-
+  d3.select("#map-container")
+      .append("div")
+      .attr("id", "map")
+    
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -387,22 +399,14 @@ function optionChanged() {
     layers: [lightmap, targetedMarkers]
   });
 
+  var [panLat] = selectedCity.map(data => data.GISLatitude)
+  var [panLng] = selectedCity.map(data => data.GISLongitude)
+  map.panTo(new L.LatLng(panLat-.20, panLng));
+
   //map.invalidateSize();
 
-  // L.control.layers(baseMaps, overlayMaps, {
-  //   collapsed: false
-  // }).removeControl(map);
-
-  // L.control.layers(baseMaps, overlayMaps, {
-  //   collapsed: false
-  // }).removeLayer(map);
-
-  // L.control.layers(baseMaps, overlayMaps, {
-  //   collapsed: false
-  // }).addTo(map);
-
-  // L.control.layers(baseMaps,overlayMaps)
-  // .addTo(map);
+  L.control.layers(baseMaps,overlayMaps)
+  .addTo(map);
 
   });
 

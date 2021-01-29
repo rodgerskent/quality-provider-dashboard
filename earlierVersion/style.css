@@ -1,0 +1,79 @@
+
+html,
+body,
+#map, #map-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+}
+
+.table-head {
+  font-size: 12px;
+  color: rgb(19, 86, 138);
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+tbody {
+  font-size: 10px;
+  color: rgb(19, 86, 138);
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+tbody tr{
+  font-size: 12px;
+  height: 10px;
+  color: rgb(19, 86, 138);
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.box {
+  min-height: 50px;
+  padding: 2px;
+  margin: 1px;
+  margin-top: 2px;
+  margin-left: 10px;
+  margin-right: 5px;
+  font-weight: 800;
+  color: #fff;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+.header {
+  background: rgb(243, 247, 248);
+  font-size: 30px;
+  color: rgb(19, 86, 138)
+}
+
+.well {
+  background: rgb(243, 247, 248);
+  font-size: 14px;
+  margin-left: 10px;
+  margin-right: 5px;
+  color: rgb(19, 86, 138)
+}
+
+.border {
+  background: rgb(89, 191, 224);
+  min-height: 10px;
+  font-size: 9px;
+}
+
+#bar{
+  width: 300px;
+  height: 250px;
+  font-size: 9px;
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
+}
+
+#myDiv{
+  width: 300px;
+  height: 250px;
+  font-size: 9px;
+  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  /* border-right: 2px solid hsla(0, 0%, 0%, 0.5); */
+  /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
+}
+

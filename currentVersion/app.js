@@ -19,8 +19,10 @@ function createMarkers(markers) {
   return (L.layerGroup(bikeMarkers));
 }
  
+console.log(vDescriptions)
 
-  d3.csv("./inspectionData.csv").then(function(diningData) {
+
+ d3.csv("./inspectionData.csv").then(function(diningData) {
     //console.log(diningData);
     var stations = diningData
     //console.log("Full data set loading at start:", stations)
@@ -50,6 +52,14 @@ function createMarkers(markers) {
     //console.log("Initial City ...")
     //console.log(inputValue1)
 
+    // var shameHover = diningData.filter(item => item["Program Identifier"] === "JP Asian Bistro Corporation")
+    // shameHover = shameHover.filter(item => item.FC08 >=1)
+    // console.log(shameHover)
+
+    // fn that takes shameHover FC's through a loop and appends
+    
+
+
     function shameSorter(a, b) {
       if (a > b) {
         return -1;
@@ -67,14 +77,40 @@ function createMarkers(markers) {
       var starterShame = starterData.filter(item => item["Total Foodborne Illness Risk Violations"] >=5)
       starterShame = starterShame.sort(shameSorter);
       starterShame = starterShame.slice(0,6)
+      foodviolations = starterData.map(item => item["Total Foodborne Illness Risk Violations"])
       //console.log("shame list")
       //console.log(starterShame)
       starterShame.forEach((offender) => {
         var row = tbody.append("tr");
         var cell = row.append("td");
-        cell.text(offender["Program Identifier"]);
+        cell.text(offender["Program Identifier"])
+        
       });
-      console.log(starterShame)
+      //console.log(starterShame)
+      
+      document.querySelectorAll('#shame-table td')
+      .forEach(e => e.addEventListener("mouseover", function() {
+          // Here, `this` refers to the element the event was hooked on
+          console.log(this.innerText)
+          var restaurantName = this.innerText
+          var grossData = stations.filter(item => item["Program Identifier"] === restaurantName)[0];
+          //console.log(Object.entries(grossData))
+          //var grossList = grossData.filter(item => item["FC ... "] === restaurantName);
+      for ([key,values] of Object.entries(grossData)){
+        if (key.startsWith("FC") && values >=1){
+          def = vDescriptions.filter(item => item.Key === key)
+          //console.log(def[0])
+          console.log(key, values, def[0].Value)
+          
+        }
+        //console.log(values)
+
+      }
+
+      }));
+
+
+
     }
   
     // Function to build a list of unique drop down menu items
@@ -152,7 +188,6 @@ function createMarkers(markers) {
   var y = foodviolations
   var trace = {
     x: y,
-    facet_col_spacing: .99,
     marker: {
       color: 'crimson',
     },
@@ -165,7 +200,7 @@ function createMarkers(markers) {
     yaxis: { title: "Number of Establishments"},
     height: 245,
     width: 480,
-    facet_col_spacing: .05,
+    bargap: 0.2,
     margin: {
       l: 75,
       r: 5,
@@ -180,6 +215,9 @@ function createMarkers(markers) {
   /// Initial pie chart build
   var data = [{
     title: "Violations by Establishment Type",
+    //title-font: 12px,
+    titleposition: "bottom-left",
+    legendposition: "bottom-right",
     values: foodviolations,
     labels: premise,
     type: 'pie'
@@ -210,9 +248,19 @@ function createMarkers(markers) {
     id: "light-v10",
     accessToken: API_KEY
   });
+
+  var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "dark-v10",
+    accessToken: API_KEY
+  });
+
+
   // Create a baseMaps object to hold the lightmap layer
   var baseMaps = {
-    "Light Map": lightmap
+    "Light Map": lightmap,
+    "Dark Map": dark
   };
   // Create an overlayMaps object to hold the bikeStations layer
   var overlayMaps = {
@@ -326,6 +374,7 @@ function optionChanged() {
         yaxis: { title: "Number of Establishments"},
         height: 245,
         width: 480,
+        bargap: 0.2,
         margin: {
           l: 75,
           r: 5,
@@ -384,8 +433,16 @@ function optionChanged() {
     accessToken: API_KEY
   });
 
+  var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "dark-v10",
+    accessToken: API_KEY
+  });
+
   var baseMaps = {
-    "Light Map": lightmap
+    "Light Map": lightmap,
+    "Dark Map": dark
   };
 
   var overlayMaps = {

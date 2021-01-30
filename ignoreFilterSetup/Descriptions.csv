@@ -1,0 +1,58 @@
+FC01,"Person in charge present, demonstrates knowledge, and performs duties"
+FC02,Certified Food Protection Manager
+FC03,"Management, food employee and conditional employee; knowledge, responsibilities and reporting"
+FC04,Proper use of restriction and exclusion
+FC05,Procedures for responding to vomiting and diarrheal events
+FC06,"Proper eating, tasting, drinking, or tobacco use"
+FC07,"No discharge from eyes, nose, and mouth"
+FC08,Hands clean & properly washed
+FC09,No bare hand contact with RTE food or a pre-approved alternative procedure properly allowed
+FC10,Adequate handwashing sinks properly supplied and accessible
+FC11,Food obtained from approved source
+FC12,Food received at proper temperature
+FC13,"Food in good condition, safe, & unadulterated"
+FC14,"Required records available: shellstock tags, parasite destruction"
+FC15,Food separated and protected
+FC16,Food contact surfaces; cleaned & sanitized
+FC17,"Proper disposition of returned, previously served, reconditioned & unsafe food"
+FC18,Proper cooking time & temperatures
+FC19,Proper reheating procedures for hot holding
+FC20,Proper cooling time and temperature
+FC21,Proper hot holding temperatures
+FC22,Proper cold holding temperatures
+FC23,Proper date marking and disposition
+FC24,Time as a Public Health Control; procedures & records
+FC25,Consumer advisory provided for raw/undercooked food
+FC26,Pasteurized foods used; prohibited foods not offered
+FC27,Food additives: approved & Properly used
+FC28,"Toxic substances properly identified, stored & used"
+FC29,Compliance with variance / specialized process / HACCP
+FC30,Pasteurized eggs used where required
+FC31,Water & ice from approved source
+FC32,Variance obtained for specialized processing methods
+FC33,Proper cooling methods used; adequate equipment for temperature control
+FC34,Plant food properly cooked for hot holding
+FC35,Approved thawing methods used
+FC36,Thermometer provided & accurate
+FC37,Food properly labeled; original container
+FC38,"Insects, rodents, & animals not present"
+FC39,"Contamination prevented during food preparation, storage & display"
+FC40,Personal cleanliness
+FC41,Wiping Cloths; properly used & stored
+FC42,Washing fruits & vegetables
+FC43,In-use utensils: properly stored
+FC44,"Utensils, equipment & linens: properly stored, dried, & handled"
+FC45,Single-use / single-service articles: properly stored & used
+FC46,Gloves used properly
+FC47,"Food & non-food contact surfaces cleanable, properly designed, constructed, & used"
+FC48,"Warewashing facilities: installed, maintained, & used; test strips"
+FC49,Non-food contact surfaces clean
+FC50,Hot & cold water available; adequate pressure
+FC51,Plumbing installed; proper backflow devices
+FC52,Sewage & waste water properly disposed
+FC53,"Toilet facilities: properly constructed, supplied, & cleaned"
+FC54,Garbage & refuse properly disposed; facilities maintained
+FC55,"Physical facilities installed, maintained, & clean"
+FC56,Adequate ventilation & lighting; designated areas used
+Total Foodborne Illness Risk Violations,Total foodborne illness risk violations for inspection codes FC01 - FC29
+Total Good Retail Practices Violations,Total good retail practices violations for inspection codes FC30 - FC56

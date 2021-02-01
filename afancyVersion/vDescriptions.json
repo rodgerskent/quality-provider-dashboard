@@ -1,0 +1,292 @@
+var vDescriptions = [
+ {
+   "Key": "FC01",
+   "FIELD2": 171,
+   "Value": "Person in charge present, demonstrates knowledge, and performs duties"
+ },
+ {
+   "Key": "FC02",
+   "FIELD2": 1475,
+   "Value": "Certified Food Protection Manager"
+ },
+ {
+   "Key": "FC03",
+   "FIELD2": 84,
+   "Value": "Management, food employee and conditional employee; knowledge, responsibilities and reporting"
+ },
+ {
+   "Key": "FC04",
+   "FIELD2": 7,
+   "Value": "Proper use of restriction and exclusion"
+ },
+ {
+   "Key": "FC05",
+   "FIELD2": 614,
+   "Value": "Procedures for responding to vomiting and diarrheal events"
+ },
+ {
+   "Key": "FC06",
+   "FIELD2": 664,
+   "Value": "Proper eating, tasting, drinking, or tobacco use"
+ },
+ {
+   "Key": "FC07",
+   "FIELD2": 3,
+   "Value": "No discharge from eyes, nose, and mouth"
+ },
+ {
+   "Key": "FC08",
+   "FIELD2": 916,
+   "Value": "Hands clean & properly washed"
+ },
+ {
+   "Key": "FC09",
+   "FIELD2": 246,
+   "Value": "No bare hand contact with RTE food or a pre-approved alternative procedure properly allowed"
+ },
+ {
+   "Key": "FC10",
+   "FIELD2": 2653,
+   "Value": "Adequate handwashing sinks properly supplied and accessible"
+ },
+ {
+   "Key": "FC11",
+   "FIELD2": 65,
+   "Value": "Food obtained from approved source"
+ },
+ {
+   "Key": "FC12",
+   "FIELD2": 7,
+   "Value": "Food received at proper temperature"
+ },
+ {
+   "Key": "FC13",
+   "FIELD2": 651,
+   "Value": "Food in good condition, safe, & unadulterated"
+ },
+ {
+   "Key": "FC14",
+   "FIELD2": 129,
+   "Value": "Required records available: shellstock tags, parasite destruction"
+ },
+ {
+   "Key": "FC15",
+   "FIELD2": 839,
+   "Value": "Food separated and protected"
+ },
+ {
+   "Key": "FC16",
+   "FIELD2": 1376,
+   "Value": "Food contact surfaces; cleaned & sanitized"
+ },
+ {
+   "Key": "FC17",
+   "FIELD2": 7,
+   "Value": "Proper disposition of returned, previously served, reconditioned & unsafe food"
+ },
+ {
+   "Key": "FC18",
+   "FIELD2": 57,
+   "Value": "Proper cooking time & temperatures"
+ },
+ {
+   "Key": "FC19",
+   "FIELD2": 100,
+   "Value": "Proper reheating procedures for hot holding"
+ },
+ {
+   "Key": "FC20",
+   "FIELD2": 278,
+   "Value": "Proper cooling time and temperature"
+ },
+ {
+   "Key": "FC21",
+   "FIELD2": 577,
+   "Value": "Proper hot holding temperatures"
+ },
+ {
+   "Key": "FC22",
+   "FIELD2": 1709,
+   "Value": "Proper cold holding temperatures"
+ },
+ {
+   "Key": "FC23",
+   "FIELD2": 1429,
+   "Value": "Proper date marking and disposition"
+ },
+ {
+   "Key": "FC24",
+   "FIELD2": 176,
+   "Value": "Time as a Public Health Control; procedures & records"
+ },
+ {
+   "Key": "FC25",
+   "FIELD2": 211,
+   "Value": "Consumer advisory provided for raw/undercooked food"
+ },
+ {
+   "Key": "FC26",
+   "FIELD2": 3,
+   "Value": "Pasteurized foods used; prohibited foods not offered"
+ },
+ {
+   "Key": "FC27",
+   "FIELD2": 3,
+   "Value": "Food additives: approved & Properly used"
+ },
+ {
+   "Key": "FC28",
+   "FIELD2": 1354,
+   "Value": "Toxic substances properly identified, stored & used"
+ },
+ {
+   "Key": "FC29",
+   "FIELD2": 47,
+   "Value": "Compliance with variance / specialized process / HACCP"
+ },
+ {
+   "Key": "Total Foodborne Illness Risk Violations",
+   "FIELD2": 15851,
+   "Value": "Total foodborne illness risk violations for inspection codes FC01 - FC29"
+ },
+ {
+   "Key": "FC30",
+   "FIELD2": 1,
+   "Value": "Pasteurized eggs used where required"
+ },
+ {
+   "Key": "FC31",
+   "FIELD2": 7,
+   "Value": "Water & ice from approved source"
+ },
+ {
+   "Key": "FC32",
+   "FIELD2": 3,
+   "Value": "Variance obtained for specialized processing methods"
+ },
+ {
+   "Key": "FC33",
+   "FIELD2": 388,
+   "Value": "Proper cooling methods used; adequate equipment for temperature control"
+ },
+ {
+   "Key": "FC34",
+   "FIELD2": 4,
+   "Value": "Plant food properly cooked for hot holding"
+ },
+ {
+   "Key": "FC35",
+   "FIELD2": 349,
+   "Value": "Approved thawing methods used"
+ },
+ {
+   "Key": "FC36",
+   "FIELD2": 594,
+   "Value": "Thermometer provided & accurate"
+ },
+ {
+   "Key": "FC37",
+   "FIELD2": 673,
+   "Value": "Food properly labeled; original container"
+ },
+ {
+   "Key": "FC38",
+   "FIELD2": 538,
+   "Value": "Insects, rodents, & animals not present"
+ },
+ {
+   "Key": "FC39",
+   "FIELD2": 882,
+   "Value": "Contamination prevented during food preparation, storage & display"
+ },
+ {
+   "Key": "FC40",
+   "FIELD2": 70,
+   "Value": "Personal cleanliness"
+ },
+ {
+   "Key": "FC41",
+   "FIELD2": 1250,
+   "Value": "Wiping Cloths; properly used & stored"
+ },
+ {
+   "Key": "FC42",
+   "FIELD2": 38,
+   "Value": "Washing fruits & vegetables"
+ },
+ {
+   "Key": "FC43",
+   "FIELD2": 913,
+   "Value": "In-use utensils: properly stored"
+ },
+ {
+   "Key": "FC44",
+   "FIELD2": 830,
+   "Value": "Utensils, equipment & linens: properly stored, dried, & handled"
+ },
+ {
+   "Key": "FC45",
+   "FIELD2": 619,
+   "Value": "Single-use / single-service articles: properly stored & used"
+ },
+ {
+   "Key": "FC46",
+   "FIELD2": 4,
+   "Value": "Gloves used properly"
+ },
+ {
+   "Key": "FC47",
+   "FIELD2": 2591,
+   "Value": "Food & non-food contact surfaces cleanable, properly designed, constructed, & used"
+ },
+ {
+   "Key": "FC48",
+   "FIELD2": 742,
+   "Value": "Warewashing facilities: installed, maintained, & used; test strips"
+ },
+ {
+   "Key": "FC49",
+   "FIELD2": 1864,
+   "Value": "Non-food contact surfaces clean"
+ },
+ {
+   "Key": "FC50",
+   "FIELD2": 110,
+   "Value": "Hot & cold water available; adequate pressure"
+ },
+ {
+   "Key": "FC51",
+   "FIELD2": 1407,
+   "Value": "Plumbing installed; proper backflow devices"
+ },
+ {
+   "Key": "FC52",
+   "FIELD2": 57,
+   "Value": "Sewage & waste water properly disposed"
+ },
+ {
+   "Key": "FC53",
+   "FIELD2": 603,
+   "Value": "Toilet facilities: properly constructed, supplied, & cleaned"
+ },
+ {
+   "Key": "FC54",
+   "FIELD2": 341,
+   "Value": "Garbage & refuse properly disposed; facilities maintained"
+ },
+ {
+   "Key": "FC55",
+   "FIELD2": 2240,
+   "Value": "Physical facilities installed, maintained, & clean"
+ },
+ {
+   "Key": "FC56",
+   "FIELD2": 1169,
+   "Value": "Adequate ventilation & lighting; designated areas used"
+ },
+ {
+   "Key": "Total Good Retail Practices Violations",
+   "FIELD2": 18287,
+   "Value": "Total good retail practices violations for inspection codes FC30 - FC56"
+ }
+]

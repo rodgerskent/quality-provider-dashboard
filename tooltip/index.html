@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<body>
+    <div class="col-md-12">
+        <!-- <body style="text-align:right;">         -->
+        <table id="shame-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th class="table-head">List of Shame</th>
+            </tr>
+            <td><div class="tooltip">Restaurant Name Here
+                <span class="tooltiptext">Violations</span>
+              </div></td>
+          </thead>
+          <tbody></tbody>
+        </table>
+    
+
+
+</body>
+
+</html>

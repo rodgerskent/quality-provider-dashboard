@@ -1,6 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 
+  <style>
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+    
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,9 +82,7 @@
           <option>All</option>
         </select>
       </div>
-      <!-- <div id="bar"></div>
-        <div id="myDiv"></div> -->
-
+     
     </div>
 
     <div class="col-md-4">
@@ -53,14 +93,30 @@
       <div id="myDiv"></div>
     </div>
     <div class="col-md-2">
+      <!-- <div class="well">
+        <select id="selDataset4" onchange="optionChanged(this.value)">
+          <option>List of Shame</option>
+          <option>Restaurant Name Here</option>
+        </select>
+      </div> -->
+      
       <table id="shame-table" class="table table-striped">
         <thead>
           <tr>
             <th class="table-head">List of Shame</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+
+          <!-- <td>
+            <div class="tooltip">Hover over me
+            <span class="tooltiptext">Tooltip text</span>
+            </div>
+          </td> -->
+
+        </tbody>
       </table>
+      
     </div>
     
 
@@ -75,6 +131,7 @@
   <!-- D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
 
   <!-- plotly -->

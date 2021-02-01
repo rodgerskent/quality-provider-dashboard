@@ -52,14 +52,6 @@ console.log(vDescriptions)
     //console.log("Initial City ...")
     //console.log(inputValue1)
 
-    // var shameHover = diningData.filter(item => item["Program Identifier"] === "JP Asian Bistro Corporation")
-    // shameHover = shameHover.filter(item => item.FC08 >=1)
-    // console.log(shameHover)
-
-    // fn that takes shameHover FC's through a loop and appends
-    
-
-
     function shameSorter(a, b) {
       if (a > b) {
         return -1;
@@ -84,6 +76,12 @@ console.log(vDescriptions)
         var row = tbody.append("tr");
         var cell = row.append("td");
         cell.text(offender["Program Identifier"])
+        // var tip = cell.append("div").classed("tooltip")
+        // var text = cell.append("span").classed("tooltiptext")
+        // tip.text(offender["Program Identifier"])
+        // text.text("Violations ...")
+
+      
         
       });
       //console.log(starterShame)
@@ -96,20 +94,17 @@ console.log(vDescriptions)
           var grossData = stations.filter(item => item["Program Identifier"] === restaurantName)[0];
           //console.log(Object.entries(grossData))
           //var grossList = grossData.filter(item => item["FC ... "] === restaurantName);
-      for ([key,values] of Object.entries(grossData)){
-        if (key.startsWith("FC") && values >=1){
+        for ([key,values] of Object.entries(grossData)){
+          if (key.startsWith("FC") && values >=1){
           def = vDescriptions.filter(item => item.Key === key)
           //console.log(def[0])
           console.log(key, values, def[0].Value)
-          
-        }
-        //console.log(values)
 
+          }
+        //console.log(values)
       }
 
       }));
-
-
 
     }
   
@@ -169,7 +164,7 @@ console.log(vDescriptions)
       });
   });
 
-  // Builds drop down menu for number of violations selection
+  // Builds drop down menu for list of shame
   var menuList3 = uniqueFoodviolations;
   //console.log("stuff for violations drop down menu")
   //console.log(menuList3);
@@ -410,8 +405,8 @@ function optionChanged() {
  
 
   // User driven mapping process starts here
-  console.log("Here is smaller city list going to mapping")
-  console.log(selectedCity)
+  //console.log("Here is smaller city list going to mapping")
+  //console.log(selectedCity)
   
   // Here is the user driven marker call
   targetedMarkers = createMarkersII(selectedCity)
@@ -485,7 +480,7 @@ function createMarkersII(secondlap) {
     targetedMarkers.push(targetedMarker);
   }
   // return (L.layerGroup(targetedMarkers));
-  console.log("Here is what fn produced ...")
-  console.log(targetedMarkers)
+  //console.log("Here is what fn produced ...")
+  //console.log(targetedMarkers)
   return L.layerGroup(targetedMarkers)
 } 

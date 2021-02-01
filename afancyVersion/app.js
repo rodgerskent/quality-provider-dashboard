@@ -84,13 +84,13 @@ console.log(vDescriptions)
       //console.log(starterShame)
 
       // Builds drop down menu for list of shame
-        var menuList4 = starterShame.map(item => item["Program Identifier"]);
-        console.log("stuff for shame drop down menu")
-        console.log(menuList4);
+        var shameDrop = starterShame.map(item => item["Program Identifier"]);
+        var menuList4 = shameDrop
+        //console.log("stuff for shame drop down menu")
+        //console.log(menuList4);
         var menu4 = d3.select("#selDataset4")
-        starterShame.forEach((menuList4) => {
-        //menu.html("");
-        //if menu not in row
+        shameDrop.forEach((menuList4) => {
+          //menu.html("");
           var row4 = menu4.append("option");
           Object.values(menuList4).forEach(([value]) => {
             var cell4 = row4.append("option");
@@ -104,7 +104,7 @@ console.log(vDescriptions)
       document.querySelectorAll('#shame-table td')
       .forEach(e => e.addEventListener("mouseover", function() {
           // Here, `this` refers to the element the event was hooked on
-          console.log(this.innerText)
+          //console.log(this.innerText)
           var restaurantName = this.innerText
           var grossData = stations.filter(item => item["Program Identifier"] === restaurantName)[0];
           //console.log(Object.entries(grossData))
@@ -113,6 +113,7 @@ console.log(vDescriptions)
           if (key.startsWith("FC") && values >=1){
           def = vDescriptions.filter(item => item.Key === key)
           //console.log(def[0])
+          console.log("Joes Saturday json beauty")
           console.log(key, values, def[0].Value)
 
           }
@@ -359,14 +360,74 @@ function optionChanged() {
         var updateShame = selectedCity.filter(item => item["Total Foodborne Illness Risk Violations"] >=5)
         //updateShame = updateShame.sort(fnShame);
         updateShame = updateShame.slice(0,6)
-        console.log("shame list")
-        console.log(updateShame)
+        //console.log("shame list")
+        //console.log(updateShame)
         updateShame.forEach((offender) => {
           var row = tbody.append("tr");
           var cell = row.append("td");
           cell.text(offender["Program Identifier"]);
         });
-        console.log(updateShame) 
+        //console.log(updateShame) 
+
+        // Builds drop down menu for list of shame
+        var option = d3.select("#selDataset4");
+        option.html("")
+        //option.append("<option>List of Shame</option")
+        // option.text("List of Shame")
+        var shameDropUpdated = updateShame.map(item => item["Program Identifier"]);
+        var menuList4 = shameDropUpdated
+        //console.log("stuff for updated shame drop down menu")
+        //console.log(menuList4);
+        var menu4b = d3.select("#selDataset4")
+        // var cell4b = row4b.append("option");
+        //     cell4b.text("List of Shame");
+        shameDropUpdated.forEach((menuList4) => {
+          var row4b = menu4b.append("option");
+          Object.values(menuList4).forEach(([value]) => {
+            var cell4b = row4b.append("option");
+            cell4b.text(value);
+            
+          });
+        });
+
+        // Replace list of shame with the detailed violations
+        
+        console.log(vDescriptions)
+        var tbody = d3.select("tbody");
+        tbody.html("");
+        var inputElement4 = d3.select("#selDataset4");
+        var inputValue4 = inputElement4.property("value");
+        console.log("inputValue4 ...")
+        console.log(inputValue4)
+        var restaurantName = inputValue4
+        console.log("restaurant name")
+        console.log(restaurantName)
+        var grossList = targetCity.filter(item => item["Program Identifier"] === restaurantName)[0];
+        console.log("grossList ...")
+        console.log(Object.entries(grossList))
+        for ([key,values] of Object.entries(grossList)){
+          if (key.startsWith("FC") && values >=1){
+          def = vDescriptions.filter(item => item.Key === key)
+            console.log("Def ...")
+            console.log(def[0].Value)
+            //console.log(key, value, def[0].Value)
+
+            def.forEach((violation) => {
+              var row = tbody.append("tr");
+              var cell = row.append("td");
+              cell.text(def[0].Value);
+            });
+
+
+
+
+            }
+          //console.log(values)
+          }
+  
+        // }));
+
+
 
             
       // Builds user driven bar chart
@@ -418,6 +479,10 @@ function optionChanged() {
     Plotly.newPlot('myDiv', data, layout);
     /// End of user driven pie chart build
  
+
+
+
+    
 
   // User driven mapping process starts here
   //console.log("Here is smaller city list going to mapping")
@@ -479,7 +544,7 @@ function optionChanged() {
 }
 
 function createMarkersII(secondlap) {
-  console.log("Fn that creates user driven markers started")
+  //console.log("Fn that creates user driven markers started")
   var establishments = secondlap[0]["Program Identifier"];
   var targetedMarkers = [];
 

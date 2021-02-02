@@ -100,27 +100,27 @@ console.log(vDescriptions)
         });
 
 
-      
-      document.querySelectorAll('#shame-table td')
-      .forEach(e => e.addEventListener("mouseover", function() {
-          // Here, `this` refers to the element the event was hooked on
-          //console.log(this.innerText)
-          var restaurantName = this.innerText
-          var grossData = stations.filter(item => item["Program Identifier"] === restaurantName)[0];
-          //console.log(Object.entries(grossData))
-          //var grossList = grossData.filter(item => item["FC ... "] === restaurantName);
-        for ([key,values] of Object.entries(grossData)){
-          if (key.startsWith("FC") && values >=1){
-          def = vDescriptions.filter(item => item.Key === key)
-          //console.log(def[0])
-          console.log("Joes Saturday json beauty")
-          console.log(key, values, def[0].Value)
+      // Tool tip effort that is sitting idle for now
+      // document.querySelectorAll('#shame-table td')
+      // .forEach(e => e.addEventListener("mouseover", function() {
+      //     // Here, `this` refers to the element the event was hooked on
+      //     //console.log(this.innerText)
+      //     var restaurantName = this.innerText
+      //     var grossData = stations.filter(item => item["Program Identifier"] === restaurantName)[0];
+      //     //console.log(Object.entries(grossData))
+      //     //var grossList = grossData.filter(item => item["FC ... "] === restaurantName);
+      //   for ([key,values] of Object.entries(grossData)){
+      //     if (key.startsWith("FC") && values >=1){
+      //     def = vDescriptions.filter(item => item.Key === key)
+      //     //console.log(def[0])
+      //     console.log("Joes Saturday json beauty")
+      //     console.log(key, values, def[0].Value)
 
-          }
-        //console.log(values)
-      }
+      //     }
+      //   //console.log(values)
+      // }
 
-      }));
+      // }));
 
     }
   
@@ -298,7 +298,51 @@ console.log(vDescriptions)
   //return overlayMaps
 });
 
+// 3rd Section just to update the table body with violation details. 
+var form = d3.select("form");
+form.on("submit", shameChanged);
 
+function shameChanged() {
+   d3.csv("./inspectionData.csv").then(function(tttData) {
+      console.log(vDescriptions)  
+      var tttEstablishment = tttData;
+      console.log(tttEstablishment)
+      var inputElement4 = d3.select("#selDataset4");
+      var inputValue4 = inputElement4.property("value");
+      console.log("InputValue4 ...")
+      console.log(inputValue4)
+      var tttRestaurant = tttEstablishment.filter(item => item["Program Identifier"] === inputValue4)[0];
+      console.log("tttRestaurant ...")
+      console.log(tttRestaurant)
+      // tttRestaurant = tttRestaurant.slice(0,6)
+
+      //Select the table body and wipe it clean for a space to post violaton list
+      var tbody = d3.select("tbody");
+      tbody.html("");
+      var grossList = tttRestaurant;
+      console.log("grossList ...")
+      console.log(Object.entries(grossList))
+      for ([key,values] of Object.entries(grossList)){
+        if (key.startsWith("FC") && values >=1){
+        def = vDescriptions.filter(item => item.Key === key)
+        def = def.slice(0,6);
+          console.log("Def ...")
+          console.log(def[0].Value)
+          //console.log(key, value, def[0].Value)
+
+          def.forEach((violation) => {
+            var row = tbody.append("tr");
+            var cell = row.append("td");
+            cell.text(def[0].Value);
+          });
+
+        }
+        //console.log(values)
+      }
+  });
+}
+
+ 
 
 
 // 2nd Main Section that responds to user selections on city and premise type
@@ -332,6 +376,7 @@ function optionChanged() {
         return targetCity.Description === inputValue2
         }
         return targetCity = targetCity
+        
 
       }
   
@@ -343,7 +388,7 @@ function optionChanged() {
         //console.log(foodinCity)
         var typeinCity = selectedCity.map(data => data.Description)
     
-       // Updated list of shame
+       // Updates the list of shame for the selected city
        function fnShame(a, b) {
         if (a > b) {
           return -1;
@@ -374,6 +419,13 @@ function optionChanged() {
         option.html("")
         //option.append("<option>List of Shame</option")
         // option.text("List of Shame")
+
+        d3.select("#selDataset4")
+          .enter()
+          .append("option")
+          .append("List of Shame")
+          .text("Alpha")
+
         var shameDropUpdated = updateShame.map(item => item["Program Identifier"]);
         var menuList4 = shameDropUpdated
         //console.log("stuff for updated shame drop down menu")
@@ -418,14 +470,11 @@ function optionChanged() {
               cell.text(def[0].Value);
             });
 
-
-
-
-            }
-          //console.log(values)
           }
+          //console.log(values)
+        }
   
-        // }));
+        // end of the shame detail addition
 
 
 

@@ -50,7 +50,9 @@ tbody tr{
   background: rgb(243, 247, 248);
   font-size: 14px;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 2px;
+  padding: 5px;
+  padding-right: 2px;
   color: rgb(19, 86, 138)
 }
 
@@ -64,7 +66,11 @@ tbody tr{
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 1px;
+  padding-right: 1px;
+  /* border-left: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }
 
@@ -72,7 +78,11 @@ tbody tr{
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 1px;
+  padding-right: 1px;
+  /* border-left: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border-right: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }

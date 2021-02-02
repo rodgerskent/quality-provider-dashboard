@@ -229,6 +229,7 @@ d3.csv("./inspectionData.csv").then(function (diningData) {
     //title-font: 12px,
     titleposition: "bottom-left",
     legendposition: "bottom-right",
+    rotation: 120,
     values: foodviolations,
     labels: premise,
     type: 'pie'
@@ -447,25 +448,20 @@ function optionChanged() {
     });
     //console.log(updateShame) 
 
-    // Builds drop down menu for list of shame
+    // Clears the HTML page of the earlier drop down menu items
     var option = d3.select("#selDataset4");
-    option.html("")
-    //option.append("<option>List of Shame</option")
-    // option.text("List of Shame")
+    option.html("");  
+    // option.insert("option",":first-child").text("List of Shame");
 
-    d3.select("#selDataset4")
-      .enter()
-      .append("option")
-      .append("List of Shame")
-      .text("Alpha")
 
+    // Add new drop down menu items based on the city the user selected
     var shameDropUpdated = updateShame.map(item => item["Program Identifier"]);
     var menuList4 = shameDropUpdated
-    //console.log("stuff for updated shame drop down menu")
-    //console.log(menuList4);
+    console.log("menuList4 Check ...")
+    console.log(menuList4)
+    console.log(menuList4.length)
+    // if statement here to correct.
     var menu4b = d3.select("#selDataset4")
-    // var cell4b = row4b.append("option");
-    //     cell4b.text("List of Shame");
     shameDropUpdated.forEach((menuList4) => {
       var row4b = menu4b.append("option");
       Object.values(menuList4).forEach(([value]) => {
@@ -487,9 +483,17 @@ function optionChanged() {
     var restaurantName = inputValue4
     console.log("restaurant name")
     console.log(restaurantName)
+    // if (grossList.length === 0) {
+    //   option.insert("option",":first-child").text("None to Report");
+    // }
     var grossList = targetCity.filter(item => item["Program Identifier"] === restaurantName)[0];
     console.log("grossList ...")
-    console.log(Object.entries(grossList))
+    // console.log(Object.entries(grossList))
+    // console.log(grossList)
+    // if (grossList.length === 0) {
+    //   option.insert("option",":first-child").text("None to Report");
+    // }
+
     for ([key, values] of Object.entries(grossList)) {
       if (key.startsWith("FC") && values >= 1) {
         def = vDescriptions.filter(item => item.Key === key)
@@ -544,6 +548,7 @@ function optionChanged() {
       title: "Violations by Establishment Type",
       values: foodinCity,
       labels: typeinCity,
+      rotation: 120,
       type: 'pie'
     }];
     var layout = {

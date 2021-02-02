@@ -46,13 +46,18 @@ tbody tr{
   color: rgb(19, 86, 138)
 }
 
+.col-md-2 {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin: 0px;
+}
+
 .well {
+  
+  margin-left: 0px;
+  margin-right: 0px;
   background: rgb(243, 247, 248);
   font-size: 14px;
-  margin-left: 10px;
-  margin-right: 2px;
-  padding: 5px;
-  padding-right: 2px;
   color: rgb(19, 86, 138)
 }
 

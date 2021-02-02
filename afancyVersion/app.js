@@ -317,6 +317,9 @@ function shameChanged() {
 
 
     if (inputValue4 === "List of Shame") {
+      console.log("Ran through the list of shame redux")
+      console.log("tttEstablishment ...")
+      console.log(tttEstablishment)
       // Updates the list of shame for the selected city
       function fnShame(a, b) {
         if (a > b) {
@@ -335,8 +338,8 @@ function shameChanged() {
         var updateShame = tttEstablishment.filter(item => item["Total Foodborne Illness Risk Violations"] >= 5)
         updateShame = updateShame.sort(fnShame);
         updateShame = updateShame.slice(0, 6)
-        //console.log("shame list")
-        //console.log(updateShame)
+        console.log("shame list")
+        console.log(updateShame)
         updateShame.forEach((offender) => {
           var row = tbody.append("tr");
           var cell = row.append("td");
@@ -346,31 +349,28 @@ function shameChanged() {
 
     }
 
+    if (inputValue4 != "List of Shame") {
+      //Select the table body and wipe it clean for a space to post violaton list
+      var tbody = d3.select("tbody");
+      tbody.html("");
+      var grossList = tttRestaurant;
+      console.log("grossList ...")
+      console.log(Object.entries(grossList))
+      for ([key, values] of Object.entries(grossList)) {
+        if (key.startsWith("FC") && values >= 1) {
+          def = vDescriptions.filter(item => item.Key === key)
+          // def = def.slice(0,6);
+          console.log("Def ...")
+          console.log(def[0].Value)
+          //console.log(key, value, def[0].Value)
 
-
-
-    //Select the table body and wipe it clean for a space to post violaton list
-    var tbody = d3.select("tbody");
-    tbody.html("");
-    var grossList = tttRestaurant;
-    console.log("grossList ...")
-    console.log(Object.entries(grossList))
-    for ([key, values] of Object.entries(grossList)) {
-      if (key.startsWith("FC") && values >= 1) {
-        def = vDescriptions.filter(item => item.Key === key)
-        // def = def.slice(0,6);
-        console.log("Def ...")
-        console.log(def[0].Value)
-        //console.log(key, value, def[0].Value)
-
-        def.forEach((violation) => {
-          var row = tbody.append("tr");
-          var cell = row.append("td");
-          cell.text(def[0].Value);
-        });
-
+          def.forEach((violation) => {
+            var row = tbody.append("tr");
+            var cell = row.append("td");
+            cell.text(def[0].Value);
+          });
+        }
       }
-      //console.log(values)
     }
   });
 }

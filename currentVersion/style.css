@@ -46,11 +46,17 @@ tbody tr{
   color: rgb(19, 86, 138)
 }
 
+/* .col-md-2 {
+  padding-right: 0px;
+  padding-left: 2px;
+  margin-left: 0px;
+} */
+
 .well {
-  background: rgb(243, 247, 248);
-  font-size: 14px;
   margin-left: 10px;
   margin-right: 5px;
+  background: rgb(243, 247, 248);
+  font-size: 14px;
   color: rgb(19, 86, 138)
 }
 
@@ -64,7 +70,11 @@ tbody tr{
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 1px;
+  padding-right: 1px;
+  /* border-left: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }
 
@@ -72,12 +82,16 @@ tbody tr{
   width: 300px;
   height: 250px;
   font-size: 9px;
-  border-left: 2px solid hsla(0, 0%, 0%, 0.5);
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 1px;
+  padding-right: 1px;
+  /* border-left: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border-right: 2px solid hsla(0, 0%, 0%, 0.5); */
   /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
 }
 
-.tooltip {
+/* .tooltip {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
@@ -111,5 +125,5 @@ tbody tr{
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-}
+} */
 

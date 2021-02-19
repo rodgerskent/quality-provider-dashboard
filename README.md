@@ -19,6 +19,6 @@ The following key insights were brought to life in the assessment.
 * []()Personally, I was surprised to see family favorite, Golden Shanghai, on the "List of Shame"   
 
 ## Reference Items & Data source
-The inspection data utilized for the dashboard can be located at: [https//data.colorado.gov/Health/Restaurant-Inspections-in-Tri-County-Colorado/869n-zj3f]
+The inspection data utilized for the dashboard can be located at: [https//data.colorado.gov/Health/Restaurant-Inspections-in-Tri-County-Colorado/869n-zj3f](https//data.colorado.gov/Health/Restaurant-Inspections-in-Tri-County-Colorado/869n-zj3f)
 
 The Tri-County Health Department responsible for conducting the inspections maintains a website at: [https//tchd.org/754/Food-Inspections]

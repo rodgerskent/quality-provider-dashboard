@@ -3,6 +3,10 @@ Quality Dining Dashboard
 Overview
 This project integrates JavaScript, HTML, CSS, Plotly and Mapbox to build an interactive and comprehensive quality dashboard for front range restaurant goes. The restaurant inspection data is retrieved from data.colorado.gov. Specifically, the data is from data.colorado.gov/Health/Restaurant-Inspections-in-Tri-County-Colorado/869n-zj3f. Users can select the city they desire to focus on and summary level performance (violation) information is presented in a histogram and pie chart. A list of restaurants to avoid is created for each city and is branded as the “List of Shame”. Further, the user may select a restaurant and see the list of detailed violations. Locations are mapped so that the user can retrieve location and address information for desirable destinations. The map offers both a light and dark map option. 
 
+![Image Name]
+[Image url]
+
+
 Approach & Methodology
 The project is currently presented with a static January 2020 Tri-County Inspection Result file. It can easily be aligned with an API for regular updates with state API approval. The application is made of three key subroutines as follows:
 1.	Initial load

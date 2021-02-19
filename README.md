@@ -14,7 +14,7 @@ The application can be utilized by visiting the following site: [https://rodgers
 ## Key Insights
 The following key insights were brought to life in the assessment.
 * []()Only 18% of restaurant inspections resulted in zero violations
-* []()85% of restaurants had less than six (6) violations, likewise, 15% had more than six (6)or more violations
+* []()85% of restaurants had less than six (6) violations, likewise, 15% had six (6) or more violations
 * []()Dashboard interest and engagement was higher than expected. Each user generally has a restaurant that they are familiar with that has a high number of violations.
 * []()Personally, I was surprised to see family favorite, Golden Shanghai, on the "List of Shame"   
 

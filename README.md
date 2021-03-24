@@ -1,4 +1,4 @@
-## Quality Dining Dashboard 
+## Quality Provider Dashboard 
 Built a web application to assist Colorado residents in avoiding restaurants that have performed poorly by violating local food handling requirements. The application was built using HTML, CSS, JavaScript, Plotly, D3 and Mapbox. Key dashboard features are:
 * []()Extracted restaurant inspection data published by the Tri-County Health Department
 * []()Make the restaurant inspection data available by city as selected by the user

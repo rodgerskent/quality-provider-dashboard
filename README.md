@@ -9,7 +9,7 @@ Built a web application to assist Colorado residents in avoiding restaurants tha
 * []()All restaurants in a user selection are mapped and have a tooltip that includes the address for easy location (or avoidance)
 
 ## Experience the Dashboard Here
-The application can be utilized by visiting the following site: [https://rodgerskent.github.io/qualityDining-dashboard]
+The application can be utilized by visiting the following site: [https://rodgerskent.github.io/quality-provider-dashboard]
 
 ## Key Insights
 The following key insights were brought to life in the assessment.

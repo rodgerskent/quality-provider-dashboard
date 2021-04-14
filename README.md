@@ -8,7 +8,7 @@ Built a web application to assist Colorado residents in avoiding restaurants tha
 * []()Users may review the detailed inspection violations by selecting a restaurant of interest from the “List of Shame” drop down menu.
 * []()All restaurants in a user selection are mapped and have a tooltip that includes the address for easy location (or avoidance)
 
-![Overview](https://github.com/rodgerskent/us-hospital-profitability/blob/main/overviewimage.jpg?raw=true)
+![Starter Page](https://github.com/rodgerskent/quality-provider-dashboard/blob/main/dashboardpage.jpg?raw=true)
 
 ## Experience the Dashboard Here
 The application can be utilized by visiting the following site: [https://rodgerskent.github.io/quality-provider-dashboard]
